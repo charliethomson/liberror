@@ -41,11 +41,11 @@ use thiserror::Error;
     content = "context"
 )]
 pub enum UserServiceError {
-    #[error(transparent)]
+    #[error("Database error: {0}")]
     #[serde(rename = "app.service.user.database")]
     Database(AnyError),
 
-    #[error(transparent)]
+    #[error("Authentication error: {0}")]
     #[serde(rename = "app.service.user.auth")]
     Authentication(AnyError),
 
