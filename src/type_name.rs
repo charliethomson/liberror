@@ -101,7 +101,7 @@ fn process_base_type(base_type: &str) -> String {
         }
     }
 
-    base_type.to_string()
+    base_type.replace("::", ".").to_string()
 }
 
 #[cfg(test)]
@@ -173,10 +173,10 @@ mod tests {
     fn test_custom_types() {
         let custom_type = standardized_type_name::<my_module::MyStruct<i32>>();
 
-        assert!(custom_type.contains("my_module::MyStruct<i32>"));
+        assert!(custom_type.contains("my_module.MyStruct<i32>"));
 
         let nested_type = standardized_type_name::<my_module::nested::NestedType<String>>();
-        assert!(nested_type.contains("my_module::nested::NestedType<String>"));
+        assert!(nested_type.contains("my_module.nested.NestedType<String>"));
     }
 
     #[test]
